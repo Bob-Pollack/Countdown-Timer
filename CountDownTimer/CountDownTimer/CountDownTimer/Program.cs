@@ -70,6 +70,11 @@ namespace CountDownTimer
                     }
                 }
                 bool success3 = int.TryParse(secondsText, out seconds);
+
+                if (hoursIndex == minutesIndex && hoursIndex == secondsIndex && hoursIndex == -1)
+                {
+                    bool didTheyAtLeastEnterANumberOfSeconds = int.TryParse(inputString, out seconds);
+                }
                 //Console.WriteLine(success + "..." + hours);
                 //Console.WriteLine(success2 + ".." + minutes);
                 //Console.WriteLine(success3 + "." + seconds);
@@ -121,17 +126,44 @@ namespace CountDownTimer
                     minutes += 59;
                     seconds += 59;
                 }
+
                 Thread.Sleep(1000);
                 Console.Clear();
-                Console.WriteLine(hours + " hours " + minutes + " minutes " + seconds + " seconds");
+                if (hours > 0)
+                {
+                    Console.WriteLine(hours + " hours " + minutes + " minutes " + seconds + " seconds");
+                }
+                else if (minutes > 0)
+                {
+                    Console.WriteLine(minutes + " minutes " + seconds + " seconds");
+                }
+                else
+                {
+                    Console.WriteLine(seconds + " seconds");
+                }
 
                 if (hours == 0 && minutes == 0 && seconds ==0)
                 {
                     timerActive = false;
                 }
             }
-            Console.Clear();
-            Console.WriteLine("Time's Up");
+
+            for (int i = 0; i < 10; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                }
+                else
+                {
+                    Console.BackgroundColor = ConsoleColor.Green;
+                }
+                Console.Clear();
+                Console.Beep();
+                Console.WriteLine("Time's Up");
+                Thread.Sleep(1000);
+            }
+
 
 
             Console.ReadLine();
